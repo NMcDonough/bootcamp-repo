@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
@@ -27,6 +28,10 @@ public class User {
     private String email;
     @Size(min=8, message="Password must be at least 8 characters")
 	private String password;
+    @Transient
+    private String confirm;
+    @Column(unique=true)
+    private String username;
     
     @Column(updatable=false)
     private Date createdAt;
@@ -35,10 +40,12 @@ public class User {
     
     public User() {}
 
-	public User(String name, String email, String password){
+	public User(String name, String email, String password, String confirm, String username){
         this.name = name;
         this.email = email;
         this.password = password;
+        this.username = username;
+        this.confirm = confirm;
     }
 
 	public Long getId() {
@@ -73,7 +80,6 @@ public class User {
 		this.password = password;
 	}
 
-	// other getters and setters removed for brevity
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
