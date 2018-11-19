@@ -9,8 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -22,70 +22,56 @@ public class Thread {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+	@Column(updatable=false)
+    private Date createdAt;
+    private Date updatedAt;
 	@Size(min=5, message="Title must be 5 or more characters")
 	private String title;
+	private String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="author_id")
-    private User author;
-	
+    @JoinColumn(name="user_id")
+    private User user;	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="bootcamp_id")
+	private Bootcamp bootcamp;	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
     private Category category;
-	
-	@JoinTable(
-	        name = "posts_threads", 
-	        joinColumns = @JoinColumn(name = "thread_id"), 
-	        inverseJoinColumns = @JoinColumn(name = "post_id")
-	    )
-	private List<Post> posts;
-	
-	@Column(updatable=false)
-    private Date createdAt;
-	
-    private Date updatedAt;
+	@OneToMany(mappedBy="thread", fetch = FetchType.LAZY)
+    private List<Post> posts;
     
     public Thread() {}
     
-    public Thread(Category category, String title, User author) {
+    public Thread(Category category, Bootcamp bootcamp, String title, User user) {
     	this.category = category;
     	this.title = title;
-    	this.author = author;
+    	this.user = user;
+    	this.bootcamp = bootcamp;
     }
     
-    @PrePersist
-    protected void onCreate(){
-        this.createdAt = new Date();
-    }
-    
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
-    }
-
-	public String getTitle() {
-		return title;
+	public String getText() {
+		return text;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	public User getAuthor() {
-		return author;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAuthor(User author) {
-		this.author = author;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Bootcamp getBootcamp() {
+		return bootcamp;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setBootcamp(Bootcamp bootcamp) {
+		this.bootcamp = bootcamp;
 	}
 
 	public List<Post> getPosts() {
@@ -96,20 +82,41 @@ public class Thread {
 		this.posts = posts;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+	@PrePersist
+	protected void onCreate(){
+		this.createdAt = new Date();
 	}
-
+	
+	@PreUpdate
+	protected void onUpdate(){
+		this.updatedAt = new Date();
+	}
 }

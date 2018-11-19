@@ -22,40 +22,42 @@ public class Post {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+	@Column(updatable=false)
+	private Date createdAt;
+	private Date updatedAt;	
 	@NotNull(message="Message cannot by empty!")
     private String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="author_id")
-    private User author;
-	
+    @JoinColumn(name="user_id")
+    private User user;
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="thread_id")
     private Thread thread;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="bootcamp_id")
+	private Bootcamp bootcamp;
 	
-	@Column(updatable=false)
-    private Date createdAt;
-	
-    private Date updatedAt;
 	
 	public Post() {}
 	
 	public Post(User user, Thread thread, String text) {
-		this.author = user;
+		this.user = user;
 		this.thread = thread;
 		this.text = text;
 	}
-	
-	@PrePersist
-    protected void onCreate(){
-        this.createdAt = new Date();
-    }
-	
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
-    }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Long getId() {
+		return id;
+	}
 
 	public String getText() {
 		return text;
@@ -63,14 +65,6 @@ public class Post {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public User getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(User author) {
-		this.author = author;
 	}
 
 	public Thread getThread() {
@@ -85,17 +79,25 @@ public class Post {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	public Date getUpdatedAt() {
 		return updatedAt;
+	} 
+	
+	public Bootcamp getBootcamp() {
+		return bootcamp;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setBootcamp(Bootcamp bootcamp) {
+		this.bootcamp = bootcamp;
 	}
-    
 
+	@PrePersist
+	protected void onCreate(){
+		this.createdAt = new Date();
+	}
+	
+	@PreUpdate
+	protected void onUpdate(){
+		this.updatedAt = new Date();
+	}
 }
