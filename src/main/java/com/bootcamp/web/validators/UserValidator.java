@@ -26,11 +26,10 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
         
-        if (!user.getConfirm().equals(user.getPassword())) {
+        if (!user.getConfirm().equals(user.getPassword()))
             errors.rejectValue("passwordConfirmation", "Match");
-        }
-        if (userRepo.findByEmail(user.getEmail()) !=null ) {
+        
+        if (userRepo.findByEmail(user.getEmail()) !=null )
             errors.rejectValue("email", "Taken");
-        }
     }
 }
