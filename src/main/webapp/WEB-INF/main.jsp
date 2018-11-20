@@ -6,19 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
     <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
 
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <link type='text/css' href="/resources/static/css/styles.css" rel='stylesheet'>
-    <title>Bootcamp Repo</title>
+    <!-- Style Sheets -->
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<title>Bootcamp Repo</title>
 </head>
 <body>
         <header>
@@ -50,16 +48,17 @@
         
         
         <section class="container">
-         <div class="row">
-            <h4>Welcome to Bootcamp Repo! New users!</h4>
-            <div class='row' id="rules">
-            	<h4>Please check out our RULES and FAQ sections</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ut, repellendus atque commodi debitis vitae magni delectus eum quod culpa, beatae deserunt sed corporis eveniet reprehenderit cum doloremque ab voluptatum?</p>
+         	<div class="row">
+	            <h3>Maybe I'll be Tracer</h3>
             </div>
-        </div>
+            <div class='row' id="rules">
+            	<h4>I'm already Tracer</h4>
+            	<p>What about Widowmaker?</p>
+        	</div>
+        </section>
         <section class="container">
         <div class="footer">
-            <p>Footer stuff goes here</p>
+            <p>I'm already Widowmaker</p>
         </div>
         </section>
        

@@ -87,6 +87,14 @@ public class User {
 		this.password = password;
 	}
 
+	public String getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
+	}
+
 	public String getFname() {
 		return fname;
 	}
