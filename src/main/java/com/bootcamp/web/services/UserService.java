@@ -1,5 +1,7 @@
 package com.bootcamp.web.services;
 
+import java.util.Optional;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,13 @@ public class UserService {
 	
 	//Register the user and hash their password
 	public User registerUser(User user) {
+		Optional<User> u = userRepo.findById((long)1);
+		if(u.isPresent()) {
+			user.setUserlevel(0);
+		}
+		else {
+			user.setUserlevel(5);
+		}
 		String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword(hashed);
 		return this.userRepo.save(user);
@@ -25,6 +34,15 @@ public class UserService {
 	//Find user in database by email
 	public User findByEmail(String email) {
 		return userRepo.findByEmail(email);
+	}
+	public User findById(Long id) {
+		Optional<User> u = userRepo.findById(id);
+		if(u.isPresent()) {
+			return u.get();
+		}
+		else {
+			return null;
+		}
 	}
 	
 	public boolean authenticateUser(String email, String password) {

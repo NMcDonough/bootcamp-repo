@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <c:set var="loggedIn" value="${user}"/>
+    <c:set var="loggedIn" value="${fname}"/>
 
     <div class="container">
         <div class="container" id='header'>
@@ -32,7 +32,7 @@
                     <ul class="navbar-nav">
                         <c:if test="${loggedIn != null}">
                             <li class="nav-item">
-                                <a class="nav-link" href="">${user.fname}</a>
+                                <a class="nav-link" href="">${fname}</a>
                             </li>
                         </c:if>
 

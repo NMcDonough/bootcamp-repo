@@ -52,6 +52,8 @@ public class User {
     
     @Transient
     private String confirm;
+    
+    private int userlevel;
         
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Thread> threads;
@@ -176,6 +178,14 @@ public class User {
 
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+
+	public int getUserlevel() {
+		return userlevel;
+	}
+
+	public void setUserlevel(int userlevel) {
+		this.userlevel = userlevel;
 	}
 
 	@PrePersist
