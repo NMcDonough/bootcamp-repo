@@ -22,22 +22,29 @@ public class Thread {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	@Column(updatable=false)
     private Date createdAt;
+	
     private Date updatedAt;
+    
 	@Size(min=5, message="Title must be 5 or more characters")
 	private String title;
+	
 	private String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="bootcamp_id")
 	private Bootcamp bootcamp;	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
     private Category category;
+	
 	@OneToMany(mappedBy="thread", fetch = FetchType.LAZY)
     private List<Post> posts;
     

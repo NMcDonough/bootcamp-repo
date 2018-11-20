@@ -31,9 +31,11 @@ public class Post {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="thread_id")
     private Thread thread;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="bootcamp_id")
 	private Bootcamp bootcamp;

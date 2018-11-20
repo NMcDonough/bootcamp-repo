@@ -20,7 +20,10 @@
     <link type='text/css' href="/resources/static/css/styles.css" rel='stylesheet'>
     <title>Bootcamp Repo</title>
 </head>
+
 <body>
+    <c:set var="loggedIn" value="${user}"/>
+
     <div class="container">
         <div class="container" id='header'>
                 <nav class="navbar navbar-expand-sm bg-light fixed-top">
@@ -28,15 +31,31 @@
                     <h1>Bootcamp Repo</h1>
                     <!-- Links -->
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link 1</a>
-                        </li>
+                        <c:if test="${loggedIn != null}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="">${user.fname}</a>
+                            </li>
+                        </c:if>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link 2</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link 3</a>
                         </li>
+
+                        <c:if test="${loggedIn != null}">
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </c:if>
+
+                        <c:if test="${loggedIn == null}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login/Register</a>
+                            </li>
+                        </c:if>
                     </ul>
                     <div class="search">
                         <form class="form-inline" action="/action_page.php">

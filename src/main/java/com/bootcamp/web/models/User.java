@@ -26,35 +26,46 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column(updatable=false)
     private Date createdAt;
+    
     private Date updatedAt;
+    
     @Size(min = 2, message="Name must have at least 2 characters")
     private String fname;
+    
     @Size(min = 2, message="Name must have at least 2 characters")
     private String lname;
+    
     private String title;
+    
     private String status;
+    
     @Column(unique = true)
     @Size(max = 50, message="Email address field must be 50 characters or fewer")
     @Email(message="{exists.email}")
     private String email;
+    
     @Size(min=8, message="Password must be at least 8 characters")
 	private String password;
+    
     @Transient
     private String confirm;
         
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Thread> threads;
+    
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Post> posts;
+    
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Review> reviews;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="bootcamp_id")
     private Bootcamp bootcamp;
 
-    
     public User() {}
 
 	public User(String fname, String lname, String title, String status, String email, String password, Bootcamp bootcamp) {
@@ -157,6 +168,15 @@ public class User {
 
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+
+	
+	public String getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
 	}
 
 	@PrePersist

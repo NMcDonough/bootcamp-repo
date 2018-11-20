@@ -30,10 +30,13 @@ public class Bootcamp {
     
     @OneToMany(mappedBy="bootcamp", fetch = FetchType.LAZY)
     private List<User> users;
+    
     @OneToMany(mappedBy="bootcamp", fetch = FetchType.LAZY)
     private List<Thread> threads;
+    
     @OneToMany(mappedBy="bootcamp", fetch = FetchType.LAZY)
     private List<Post> posts;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "bootcamps_categories", 
