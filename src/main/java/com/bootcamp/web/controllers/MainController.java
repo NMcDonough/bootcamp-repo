@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MainController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String serve() {
-		return "index.jsp";
+	public String dashboard() {
+		return "main";
 	}
 }
