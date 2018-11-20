@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bootcamp.web.models.User;
 import com.bootcamp.web.services.UserService;
-import com.bootcamp.web.validators.UserValidator;
+import com.bootcamp.web.validator.UserValidator;
 
 @Controller
 public class MainController {
@@ -30,7 +30,8 @@ public class MainController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String serve(HttpSession session, Model model) {
 		if(session.getAttribute("user") != null) {
-			model.addAttribute("user", session.getAttribute("user"));
+			User u = userService.findById((Long) session.getAttribute("user"));
+			model.addAttribute("fname", u.getFname());
 		}
 		return "index";
 	}
@@ -67,7 +68,7 @@ public class MainController {
 		if(userService.authenticateUser(email, password)) {
     		User user = userService.findByEmail(email);
 //    		Long id = user.getId();
-    		session.setAttribute("user", user);
+    		session.setAttribute("user", user.getId());
     		return "redirect:/";
     	} else {
     		model.addAttribute("error", "Could not log you in!");

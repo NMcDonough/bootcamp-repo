@@ -1,4 +1,4 @@
-package com.bootcamp.web.validators;
+package com.bootcamp.web.validator;
 
 
 import org.springframework.stereotype.Component;
@@ -10,13 +10,10 @@ import com.bootcamp.web.repositories.UserRepository;
 
 @Component
 public class UserValidator implements Validator {
-	
 	private final UserRepository userRepo;
-	
 	public UserValidator(UserRepository userRepo) {
 		this.userRepo = userRepo;
 	}
-	
 	@Override
     public boolean supports(Class<?> clazz) {
         return User.class.equals(clazz);
@@ -26,10 +23,11 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
         
-        if (!user.getConfirm().equals(user.getPassword()))
+        if (!user.getConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirmation", "Match");
-        
-        if (userRepo.findByEmail(user.getEmail()) !=null )
+        }
+        if (userRepo.findByEmail(user.getEmail()) !=null ) {
             errors.rejectValue("email", "Taken");
+        }
     }
 }
