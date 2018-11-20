@@ -1,13 +1,12 @@
 package com.bootcamp.web.repositories;
+import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import com.bootcamp.web.models.Thread;
 
-import com.bootcamp.web.models.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
-
-    User findByEmail(String email);
-
+public interface ThreadRepository extends CrudRepository<Thread, Long> {
+    List<Thread> findAll(); 
 }

@@ -32,7 +32,7 @@ public class MainController {
 		if(session.getAttribute("user") != null) {
 			model.addAttribute("user", session.getAttribute("user"));
 		}
-		return "index.jsp";
+		return "index";
 	}
 	
 	//Login page for testing login and registration
@@ -40,7 +40,7 @@ public class MainController {
 	public String logreg(@ModelAttribute("user") User user, Model model) {
 		model.addAttribute("newUser", new User());
 		model.addAttribute("user", new User());
-		return "logreg.jsp";
+		return "logreg";
 	}
 	
 	//Post method for handling user registration
@@ -72,7 +72,7 @@ public class MainController {
     	} else {
     		model.addAttribute("error", "Could not log you in!");
     		model.addAttribute("user", new User());
-    		return "index.jsp";
+    		return "index";
     	}
 	}
 	
@@ -87,6 +87,6 @@ public class MainController {
 	//Error page - not currently functional
 	@RequestMapping(value="/error", method=RequestMethod.GET)
 	public String errorPage() {
-		return "errorPage.jsp";
+		return "errorPage";
 	}
 }

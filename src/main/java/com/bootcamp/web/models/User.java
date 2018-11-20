@@ -98,6 +98,14 @@ public class User {
 		this.password = password;
 	}
 
+	public String getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
+	}
+
 	public String getFname() {
 		return fname;
 	}
@@ -168,15 +176,6 @@ public class User {
 
 	public Date getUpdatedAt() {
 		return updatedAt;
-	}
-
-	
-	public String getConfirm() {
-		return confirm;
-	}
-
-	public void setConfirm(String confirm) {
-		this.confirm = confirm;
 	}
 
 	@PrePersist
