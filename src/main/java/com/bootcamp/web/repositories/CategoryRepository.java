@@ -8,5 +8,5 @@ import com.bootcamp.web.models.Category;
 
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Long> {
-    List<Category> findAll(); 
+    List<Category> findAll();
 }

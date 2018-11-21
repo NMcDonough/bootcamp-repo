@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,6 +21,7 @@ import com.bootcamp.web.services.UserService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
 	private final CategoryService cServ;
 	private final UserService uServ;
 	
@@ -27,13 +29,8 @@ public class AdminController {
 		this.cServ = cServ;
 		this.uServ = uServ;
 	}
-	@RequestMapping("/categories")
-	public String getCategories(Model model){
-		List<Category> cates = cServ.getAll();
-		model.addAttribute("categories", cates);
-		return "categories";
-	}
-	@RequestMapping(value="/categories/new", method=RequestMethod.GET)
+	
+	@RequestMapping(value="/categories", method=RequestMethod.GET)
 	public String newCategory(@ModelAttribute("category") Category category, Model model, HttpSession session) {		
 		Long id =  (Long) session.getAttribute("user");
 		if (id == null) {			
@@ -43,15 +40,17 @@ public class AdminController {
 		if(u.getUserlevel()<5) {
 			return "redirect:/";			
 		}
+		List<Category> cates = cServ.getAll();
+		model.addAttribute("categories", cates);
 		model.addAttribute("category", new Category());
-		return "newcategory";
+		return "categories";
 	}
-	@RequestMapping(value="/categories/new", method=RequestMethod.POST)
+	@RequestMapping(value="/categories", method=RequestMethod.POST)
 	public String Register(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model, HttpSession session) {		
 		Long id =  (Long) session.getAttribute("user");
-		if (id == null) {			
-			return "redirect:/";			
-		}
+		if (id == null) {	
+			return "redirect:/";
+		}	
 		User u = uServ.findById(id);
 		if(u.getUserlevel()<5) {
 			return "redirect:/";			
@@ -61,6 +60,16 @@ public class AdminController {
 			return "redirect:/admin/categories/new";
 		}
 		cServ.createCategory(category);
+		return "redirect:/admin/categories";
+	}
+	
+	@RequestMapping("categories/delete/{id}")
+	public String delete(HttpSession session, @PathVariable("id") Long id) {
+		User u = uServ.findById((Long) session.getAttribute("user"));
+		if(id == null)
+			return "redirect:/";
+		if(u.getUserlevel() == 5)
+			cServ.deleteCategory(id);
 		return "redirect:/admin/categories";
 	}
 	

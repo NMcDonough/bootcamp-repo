@@ -9,8 +9,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <c:forEach items="${categories}" var="category">
-    	<h1><c:out value="${category.name}"/></h1>
-    </c:forEach>	
+    <div class="newCat">
+        <h3>Add a category</h3>
+        <form:form method="POST" action="/admin/categories" modelAttribute="category">
+            <p>
+                 <form:label path="name">Name:</form:label>
+                 <form:input path="name"/>
+                 <form:errors path="name" class="red"/>
+            </p>
+             <input type="submit" value="New One"/>
+        </form:form>
+    </div>
+
+    <div class="categories">
+        <c:forEach items="${categories}" var="category">
+            <h1><c:out value="${category.name}"/></h1>
+            <div class="catOptions">
+                <a href="/admin/categories/delete/${category.id}">Delete</a>
+            </div>
+        </c:forEach>	
+    </div>
 </body>
 </html>

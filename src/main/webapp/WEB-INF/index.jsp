@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <c:set var="loggedIn" value="${fname}"/>
+    <c:set var="loggedIn" value="${user.fname}"/>
 
     <div class="container">
         <div class="container" id='header'>
@@ -32,7 +32,7 @@
                     <ul class="navbar-nav">
                         <c:if test="${loggedIn != null}">
                             <li class="nav-item">
-                                <a class="nav-link" href="">${fname}</a>
+                                <a class="nav-link" href="">${user.fname}</a>
                             </li>
                         </c:if>
 
@@ -44,18 +44,25 @@
                             <a class="nav-link" href="#">Link 3</a>
                         </li>
 
-                        <c:if test="${loggedIn != null}">
-                            <li class="nav-item">
-                                <a href="/logout" class="nav-link" href="/logout">Logout</a>
-                            </li>
-                        </c:if>
-
                         <c:if test="${loggedIn == null}">
                             <li class="nav-item">
                                 <a class="nav-link" href="/login">Login/Register</a>
                             </li>
                         </c:if>
+
+                        <c:if test="${loggedIn != null && user.userlevel == 5}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/categories">Categories</a>
+                            </li>    
+                        </c:if>
+
+                        <c:if test="${loggedIn != null}">
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </c:if>
                     </ul>
+
                     <div class="search">
                         <form class="form-inline" action="/action_page.php">
                             <input class="form-control mr-sm-2" type="text" placeholder="Search">

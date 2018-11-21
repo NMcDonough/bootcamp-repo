@@ -6,16 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Admin: Categories</title>
 </head>
 <body>
-	<form:form method="POST" action="/admin/categories/new" modelAttribute="category">
-	     <p>
-	         <form:label path="name">Name:</form:label>
-	         <form:input path="name"/>
-	         <form:errors path="name" class="red"/>
-	     </p>
-	     <input type="submit" value="New One"/>
-	 </form:form>
 </body>
 </html>

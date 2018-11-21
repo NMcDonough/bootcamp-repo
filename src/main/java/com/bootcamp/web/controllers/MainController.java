@@ -31,7 +31,8 @@ public class MainController {
 	public String serve(HttpSession session, Model model) {
 		if(session.getAttribute("user") != null) {
 			User u = userService.findById((Long) session.getAttribute("user"));
-			model.addAttribute("fname", u.getFname());
+			u.setPassword(null);// Set password to null so no information on the users pw can be derived from session data stored on the browser
+			model.addAttribute("user", u);
 		}
 		return "index";
 	}
@@ -67,13 +68,12 @@ public class MainController {
 		
 		if(userService.authenticateUser(email, password)) {
     		User user = userService.findByEmail(email);
-//    		Long id = user.getId();
     		session.setAttribute("user", user.getId());
     		return "redirect:/";
     	} else {
     		model.addAttribute("error", "Could not log you in!");
     		model.addAttribute("user", new User());
-    		return "index";
+    		return "logreg";
     	}
 	}
 	
