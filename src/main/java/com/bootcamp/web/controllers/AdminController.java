@@ -59,6 +59,7 @@ public class AdminController {
 			model.addAttribute("category", new Category());
 			return "redirect:/admin/categories/new";
 		}
+		//Test
 		cServ.createCategory(category);
 		return "redirect:/admin/categories";
 	}
