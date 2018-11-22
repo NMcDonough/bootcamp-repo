@@ -24,10 +24,10 @@
     <c:set var="loggedIn" value="${user.fname}"/>
 
     <div class="container">
-        <div class="container" id='header'>
+        <div class="container dropdown" id='header'>
                 <nav class="navbar navbar-expand-sm bg-light fixed-top">
                     <!-- TITLE -->
-                    <h1>Bootcamp Repo</h1>
+                    <h1 class="nav-item">Bootcamp Repo</h1>
                     <!-- Links -->
                     <ul class="navbar-nav">
                         <c:if test="${loggedIn != null}">
@@ -50,11 +50,20 @@
                             </li>
                         </c:if>
 
-                        <c:if test="${loggedIn != null && user.userlevel == 5}">
+                        <!-- <c:if test="${loggedIn != null && user.userlevel == 5}"> -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin/categories">Categories</a>
+                                <div class="dropdown btn-group">
+                                    <button type="button" class="btn nav-link" href="/admin/categories">Admin Panel</button>
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" id="dropwdonMenuLink" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" href="#">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Dropdown item 1</a>
+                                        <a class="dropdown-item" href="#">Dropdown item 2</a>
+                                    </div>
+                                </div>
                             </li>    
-                        </c:if>
+                        <!-- </c:if> -->
 
                         <c:if test="${loggedIn != null}">
                             <li class="nav-item">
@@ -63,7 +72,7 @@
                         </c:if>
                     </ul>
 
-                    <div class="search">
+                    <div class="search nav-item">
                         <form class="form-inline" action="/action_page.php">
                             <input class="form-control mr-sm-2" type="text" placeholder="Search">
                             <button class="btn btn-success" type="submit">Search</button>
