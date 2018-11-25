@@ -6,10 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Categories Menu</title>
 </head>
 <body>
     <div class="newCat">
+        <h1>This page is for making changes to the categories in the database</h1>
+        <br>
         <h3>Add a category</h3>
         <form:form method="POST" action="/admin/categories" modelAttribute="category">
             <p>

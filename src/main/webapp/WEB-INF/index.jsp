@@ -50,7 +50,7 @@
                             </li>
                         </c:if>
 
-                        <!-- <c:if test="${loggedIn != null && user.userlevel == 5}"> -->
+                        <c:if test="${loggedIn != null && user.userlevel == 5}">
                             <li class="nav-item">
                                 <div class="dropdown btn-group">
                                     <button type="button" class="btn nav-link" href="/admin/categories">Admin Panel</button>
@@ -58,12 +58,14 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Dropdown item 1</a>
-                                        <a class="dropdown-item" href="#">Dropdown item 2</a>
+                                        <a class="dropdown-item" href="/admin/categories">Categories</a>
+                                        <a class="dropdown-item" href="/admin/threads">Threads</a>
+                                        <a class="dropdown-item" href="/admin/posts">Posts</a>
+                                        <a class="dropdown-item" href="/admin/users">Users</a>
                                     </div>
                                 </div>
                             </li>    
-                        <!-- </c:if> -->
+                        </c:if>
 
                         <c:if test="${loggedIn != null}">
                             <li class="nav-item">
