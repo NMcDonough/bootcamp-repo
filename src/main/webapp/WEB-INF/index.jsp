@@ -87,7 +87,7 @@
             <h4>Welcome to Bootcamp Repo! New users, please check out our RULES and FAQ sections</h4>
 
             <div class='container' id="rules">
-
+                
             </div>
         </div>
         <div class="footer">

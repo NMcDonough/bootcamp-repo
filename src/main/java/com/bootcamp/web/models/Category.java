@@ -23,25 +23,34 @@ public class Category {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
     @Column(updatable=false)
     private Date createdAt;
+    
     private Date updatedAt;
+    
     private String name;
+    
+    @Column
+    private int accessLevel;
     
     @OneToMany(mappedBy="category", fetch = FetchType.LAZY)
     private List<Thread> threads;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "bootcamps_categories", 
         joinColumns = @JoinColumn(name = "bootcamp_id"), 
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    
     private List<Bootcamp> bootcamps;
     
     public Category() {}
     
-    public Category(String name) {
+    public Category(String name, int access) {
     	this.name = name;
+    	this.accessLevel = access;
     }
     
     public String getName() {
@@ -78,6 +87,14 @@ public class Category {
 
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+
+	public int getAccessLevel() {
+		return accessLevel;
+	}
+
+	public void setAccessLevel(int accessLevel) {
+		this.accessLevel = accessLevel;
 	}
 
 	@PrePersist
