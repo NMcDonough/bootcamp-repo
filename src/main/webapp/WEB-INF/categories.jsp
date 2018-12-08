@@ -19,13 +19,25 @@
                  <form:input path="name"/>
                  <form:errors path="name" class="red"/>
             </p>
-             <input type="submit" value="New One"/>
+
+            <p>
+                <form:label path="accessLevel">Access Level:</form:label>
+                <form:select path="accessLevel">
+                    <form:option value="1">Everyone</form:option>
+                    <form:option value="2">Users</form:option>
+                    <form:option value="3">Moderators</form:option>
+                    <form:option value="5">Admins</form:option>
+                </form:select>
+                <form:errors path="accessLevel" class="red"/>
+           </p>
+             <input type="submit" value="create"/>
         </form:form>
     </div>
 
     <div class="categories">
         <c:forEach items="${categories}" var="category">
             <h1><c:out value="${category.name}"/></h1>
+            <h2><c:out value="Access Level: ${category.accessLevel}"/></h2>
             <div class="catOptions">
                 <a href="/admin/categories/delete/${category.id}">Delete</a>
             </div>

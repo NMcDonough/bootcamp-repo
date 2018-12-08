@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bootcamp.web.models.Category;
 import com.bootcamp.web.models.User;
+import com.bootcamp.web.models.Thread;
 import com.bootcamp.web.services.CategoryService;
+import com.bootcamp.web.services.ThreadService;
 import com.bootcamp.web.services.UserService;
 
 @Controller
@@ -24,14 +26,16 @@ public class AdminController {
 	
 	private final CategoryService cServ;
 	private final UserService uServ;
+	private final ThreadService tServ;
 	
-	public AdminController(UserService uServ, CategoryService cServ) {
+	public AdminController(UserService uServ, CategoryService cServ, ThreadService tServ) {
 		this.cServ = cServ;
 		this.uServ = uServ;
+		this.tServ = tServ;
 	}
 	
 	@RequestMapping(value="/categories", method=RequestMethod.GET)
-	public String newCategory(@ModelAttribute("category") Category category, Model model, HttpSession session) {		
+	public String categories(@ModelAttribute("category") Category category, Model model, HttpSession session) {		
 		Long id =  (Long) session.getAttribute("user");
 		if (id == null) {			
 			return "redirect:/";			
@@ -45,8 +49,10 @@ public class AdminController {
 		model.addAttribute("category", new Category());
 		return "categories";
 	}
+	
+	
 	@RequestMapping(value="/categories", method=RequestMethod.POST)
-	public String Register(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model, HttpSession session) {		
+	public String createCategory(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model, HttpSession session) {		
 		Long id =  (Long) session.getAttribute("user");
 		if (id == null) {	
 			return "redirect:/";
@@ -65,13 +71,58 @@ public class AdminController {
 	}
 	
 	@RequestMapping("categories/delete/{id}")
-	public String delete(HttpSession session, @PathVariable("id") Long id) {
+	public String deleteCategory(HttpSession session, @PathVariable("id") Long id) {
 		User u = uServ.findById((Long) session.getAttribute("user"));
 		if(id == null)
 			return "redirect:/";
 		if(u.getUserlevel() == 5)
 			cServ.deleteCategory(id);
 		return "redirect:/admin/categories";
+	}
+	
+	@RequestMapping(value="/threads", method=RequestMethod.GET)
+	public String threads(@ModelAttribute("thread") Thread thread, Model model, HttpSession session) {		
+		Long id =  (Long) session.getAttribute("user");
+		if (id == null) {			
+			return "redirect:/";			
+		}
+		User u = uServ.findById(id);
+		if(u.getUserlevel()<5) {
+			return "redirect:/";			
+		}
+		List<Thread> threads = tServ.getAll();
+		model.addAttribute("threads", threads);
+		model.addAttribute("thread", new Thread());
+		return "threads";
+	}
+	
+	
+	@RequestMapping(value="/threads", method=RequestMethod.POST)
+	public String createThread(@Valid @ModelAttribute("thread") Thread thread, BindingResult result, Model model, HttpSession session) {		
+		Long id =  (Long) session.getAttribute("user");
+		if (id == null) {	
+			return "redirect:/";
+		}	
+		User u = uServ.findById(id);
+		if(u.getUserlevel()<5) {
+			return "redirect:/";			
+		}
+		if(result.hasErrors()) {
+			model.addAttribute("thread", new Thread());
+			return "redirect:/admin/categories/new";
+		}
+		tServ.createThread(thread);
+		return "redirect:/admin/categories";
+	}
+	
+	@RequestMapping("threads/delete/{id}")
+	public String deleteThread(HttpSession session, @PathVariable("id") Long id) {
+		User u = uServ.findById((Long) session.getAttribute("user"));
+		if(id == null)
+			return "redirect:/";
+		if(u.getUserlevel() == 5)
+			tServ.deleteThread(id);
+		return "redirect:/admin/threads";
 	}
 	
 }

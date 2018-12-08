@@ -73,6 +73,7 @@ public class MainController {
     	} else {
     		model.addAttribute("error", "Could not log you in!");
     		model.addAttribute("user", new User());
+    		model.addAttribute("newUser", new User());
     		return "logreg";
     	}
 	}
