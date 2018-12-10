@@ -1,0 +1,30 @@
+
+#header {
+    width: 100vw;
+    margin-bottom: 5px;
+}
+
+.navbar {
+    justify-content: space-between;
+    /* border: 1px solid green; */
+}
+
+.navbar-nav {
+    width: 40%;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid red;
+}
+
+#adminPanel {
+    display: flex;
+}
+
+.dropdown-menu {
+    position: relative;
+}
+
+.nav-item {
+    display: flex;
+    border: 1px solid green;
+}

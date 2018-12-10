@@ -20,12 +20,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name="bootcamps")
 public class Bootcamp {
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
 	@Column(updatable=false)
     private Date createdAt;
+	
     private Date updatedAt;
+    
     private String name;
     
     @OneToMany(mappedBy="bootcamp", fetch = FetchType.LAZY)
@@ -44,11 +48,15 @@ public class Bootcamp {
         inverseJoinColumns = @JoinColumn(name = "bootcamp_id")
     )
     private List<Category> categories;
+    
+    @Column(name="bootcamp_image")
+    private String image;
 
     public Bootcamp() {}
     
-    public Bootcamp(String name) {
+    public Bootcamp(String name, String image) {
     	this.name = name;
+    	this.image = image;
     }
     
     public String getName() {
@@ -101,6 +109,15 @@ public class Bootcamp {
 
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@PrePersist
