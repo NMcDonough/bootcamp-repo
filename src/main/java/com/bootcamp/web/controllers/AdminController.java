@@ -162,4 +162,18 @@ public class AdminController {
 			return "redirect:/admin/bootcamps";
 		}
 	}
+	
+	@RequestMapping(value="bootcamps/delete/{id}", method=RequestMethod.GET)
+	public String delBootCamp(HttpSession session, @PathVariable("id") Long bootId, Model model) {
+		Long id =  (Long) session.getAttribute("user");
+		if (id == null) {			
+			return "redirect:/";			
+		}
+		User u = uServ.findById(id);
+		if(u.getUserlevel()<5) {
+			return "redirect:/";			
+		}
+		bServ.deleteBootcamp(bootId);
+		return "redirect:/admin/bootcamps";
+	}
 }

@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bootcamps Menu</title>
+
+    <link rel="stylesheet" href="/css/bootcamps.css">
 </head>
 <body>
     <h1>This page is meant for making changes to the bootcamps in the database</h1>
@@ -16,13 +18,13 @@
     <div class="form-group">
         <form:form method="POST" action="/admin/bootcamps" modelAttribute="bootcamp">
             <p>
+                <form:label path="image">Image URL</form:label>
                 <form:input type="url" path="image" name="image" />
             </p>
-            <c:if test="${bootcamp.image}">
-                <p>Current image:</p>
-                <img src="${bootcamp.image}" alt="bootcamp img">
-            </c:if>
-            <form:input type="text" path="name"/>
+            <p>
+                <form:label path="name">Name</form:label>
+                <form:input type="text" path="name"/>
+            </p>
             <input type="submit" class="btn" value="submit"/>
         </form:form>
     </div>
@@ -32,8 +34,14 @@
             <c:forEach items="${bootcamps}" var="bootcamp">
                 <div class="bootcamp">
                     <tr>
-                        <img src="${bootcamp.image}" alt="${bootcamp.name}" class="bootImg">
-                        <p>${bootcamp.name}</p>
+                        <div>
+                            <p>${bootcamp.name}</p>
+                            <img src="${bootcamp.image}" alt="${bootcamp.name}" class="bootImg">
+                        </div>
+                    </tr>
+                    <tr>
+                        <a href="/admin/bootcamps/edit/${bootcamp.id}">Edit</a> |
+                        <a href="/admin/bootcamps/delete/${bootcamp.id}">Delete</a>
                     </tr>
                 </div>
             </c:forEach>
