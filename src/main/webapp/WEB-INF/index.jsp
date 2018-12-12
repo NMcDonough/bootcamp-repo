@@ -21,8 +21,6 @@
 </head>
 
 <body>
-    <c:set var="loggedIn" value="${user.fname}"/>
-
     <div class="container">
 
         <%@ include file="partials/nav.html" %>
@@ -35,8 +33,21 @@
             </div>
         </div>
 
-        <div class="container bootcamp">
-            <h1>Bootcamps</h1>
+        <div class="container bootcamps">
+            <div class="title">
+                <h1>Bootcamps</h1>
+            </div>
+
+            <div class="bootList">
+                <c:forEach items="${bootcamps}" var="bootcamp">
+                    <div class="bootcamp">
+                        <h3>${bootcamp.name}</h3>
+                        <a href="/bootcamp/${bootcamp.name}/${bootcamp.id}">
+                            <img class="bootImg" src="${bootcamp.image}" alt="${bootcamp.name}">
+                        </a>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
 
         <div class="footer">

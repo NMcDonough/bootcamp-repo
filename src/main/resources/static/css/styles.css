@@ -14,3 +14,24 @@
     width: 90%;
     background-color: gray;
 }
+
+.bootcamp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bootList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bootImg {
+    width: 100px;
+    height: 100px;
+}
+
+.bootcamp {
+    /* border: 1px solid black; */
+    margin: 1%;
+}

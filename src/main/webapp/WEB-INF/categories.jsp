@@ -9,7 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Categories Menu</title>
 </head>
+
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootcamps.css">
+<link rel="stylesheet" href="/css/nav.css">
+
 <body>
+    <%@ include file="partials/nav.html" %>
+
     <div class="newCat">
         <h1>This page is for making changes to the categories in the database</h1>
         <br>

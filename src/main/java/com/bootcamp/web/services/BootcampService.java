@@ -32,4 +32,9 @@ public class BootcampService {
 		if(b.get() != null)
 			bootRepo.delete(b.get());
 	}
+	
+	public Bootcamp findById(Long id) {
+		Optional<Bootcamp> b = this.bootRepo.findById(id);
+		return b.get();
+	}
 }

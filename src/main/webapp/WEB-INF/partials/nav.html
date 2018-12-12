@@ -1,10 +1,16 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link rel="stylesheet" type="test/css" href="/css/nav.css">
+
+<c:set var="loggedIn" value="${user.fname}"/>
 
 <div class="container" id="header">
     <nav class="navbar navbar-expand-sm bg-light fixed-top">
 
         <!-- TITLE -->
-        <h1 class="nav-item">Bootcamp Repo</h1>
+        <a href="/">
+            <h1 class="nav-item" id="title">Bootcamp Repo</h1>
+        </a>
 
         <!-- Links -->
         <ul class="navbar-nav" id="links">

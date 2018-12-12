@@ -45,12 +45,14 @@ public class AdminController {
 			return "redirect:/";			
 		}
 		User u = uServ.findById(id);
+		u.setPassword(null);
 		if(u.getUserlevel()<5) {
 			return "redirect:/";			
 		}
 		List<Category> cates = cServ.getAll();
 		model.addAttribute("categories", cates);
 		model.addAttribute("category", new Category());
+		model.addAttribute("user", u);
 		return "categories";
 	}
 	
@@ -131,13 +133,16 @@ public class AdminController {
 	
 	@RequestMapping("bootcamps")
 	public String bootcamps(HttpSession session, @ModelAttribute("bootcamp") Bootcamp bootcamp, Model model) {
-		Long id =  (Long) session.getAttribute("user");
-		if (id == null) {			
-			return "redirect:/";			
+		User u;
+		if(session.getAttribute("user") != null) {
+			u = uServ.findById((Long) session.getAttribute("user"));
+			u.setPassword(null);// Set password to null so no information on the users pw can be derived from session data stored on the browser
+			model.addAttribute("user", u);
+		} else {
+			return "redirect:/";
 		}
-		User u = uServ.findById(id);
-		if(u.getUserlevel()<5) {
-			return "redirect:/";			
+		if(u.getUserlevel() < 5) {
+			return "redirect:/";
 		}
 		List<Bootcamp> bootcamps = bServ.getAll();
 		model.addAttribute("bootcamps", bootcamps);
