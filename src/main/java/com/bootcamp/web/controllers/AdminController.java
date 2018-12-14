@@ -49,7 +49,7 @@ public class AdminController {
 		if(u.getUserlevel()<5) {
 			return "redirect:/";			
 		}
-		List<Category> cates = cServ.getAll();
+		List<Category> cates = cServ.findAll();
 		model.addAttribute("categories", cates);
 		model.addAttribute("category", new Category());
 		model.addAttribute("user", u);

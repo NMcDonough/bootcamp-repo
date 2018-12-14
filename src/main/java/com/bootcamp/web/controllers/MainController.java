@@ -1,5 +1,6 @@
 package com.bootcamp.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bootcamp.web.models.Bootcamp;
 import com.bootcamp.web.models.User;
+import com.bootcamp.web.models.Category;
 import com.bootcamp.web.services.BootcampService;
+import com.bootcamp.web.services.CategoryService;
 import com.bootcamp.web.services.UserService;
 import com.bootcamp.web.validator.UserValidator;
 
@@ -26,11 +29,13 @@ public class MainController {
 	private final UserService userService;
     private final UserValidator userValidator;
     private final BootcampService bServ;
+    private final CategoryService cServ;
 	
-	public MainController(UserService us, UserValidator uv, BootcampService bs) {
+	public MainController(UserService us, UserValidator uv, BootcampService bs, CategoryService cs) {
 		this.userService = us;
 		this.userValidator = uv;
 		this.bServ = bs;
+		this.cServ = cs;
 	}
 	
 	//Home page; if 'user' value found in session, add user data to 'model' - for persistent login
@@ -111,7 +116,9 @@ public class MainController {
 			u.setPassword(null);
 			model.addAttribute("user", u);
 		}
+		List<Category> categories = cServ.findAll();
 		model.addAttribute("bootcamp", bootcamp);
+		model.addAttribute("categories", categories);
 		return "bootcamp";
 	}
 }

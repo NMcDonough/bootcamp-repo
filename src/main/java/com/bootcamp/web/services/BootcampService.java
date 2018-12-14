@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import com.bootcamp.web.models.Bootcamp;
-import com.bootcamp.web.models.Category;
 import com.bootcamp.web.repositories.BootcampRepository;
 
 @Service

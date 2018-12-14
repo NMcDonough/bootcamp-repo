@@ -1,0 +1,19 @@
+body {
+    margin-top: 70px;
+}
+
+.catBoxes {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2%;
+}
+
+.catBox {
+    display: flex;
+    margin: 1%;
+    border: 1px solid gray;
+    border-radius: 15px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
