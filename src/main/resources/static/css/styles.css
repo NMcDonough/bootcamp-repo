@@ -3,33 +3,35 @@
     /* ENABLE THIS LINE TO TEST CSS RELOAD */
     /* border: 1px solid red;  */
 }
+
+.footer {
+    margin-top: 100px;
+}
+
 #body {
-    /* position:  absolute; */
-    margin-top: 70px;
+    margin-top: 100px;
     display: flex;
     width: 90%;
     background-color: gray;
 }
 
-.footer {
-    /* position:  absolute; */
-    margin-top: 100px;
+.bootcamp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#header {
-    width: 100vw;
-    margin-bottom: 5px;
+.bootList {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.navbar {
-    justify-content: space-between;
+.bootImg {
+    width: 100px;
+    height: 100px;
 }
 
-.navbar-nav {
-    width: 40%;
-    justify-content: space-between;
-}
-
-.dropdown-menu {
-    position: relative;
+.bootcamp {
+    /* border: 1px solid black; */
+    margin: 1%;
 }
