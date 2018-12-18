@@ -36,4 +36,13 @@ public class BootcampService {
 		Optional<Bootcamp> b = this.bootRepo.findById(id);
 		return b.get();
 	}
+	
+	public Bootcamp findByName(String name) {
+		Bootcamp bootcamp= this.bootRepo.findByName(name);
+		if(bootcamp != null) {
+			return bootcamp;
+		} else {
+			return null;
+		}
+	}
 }

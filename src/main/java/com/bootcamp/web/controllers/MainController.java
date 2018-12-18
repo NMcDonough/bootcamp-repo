@@ -46,17 +46,11 @@ public class MainController {
 			u.setPassword(null);// Set password to null so no information on the users pw can be derived from session data stored on the browser
 			model.addAttribute("user", u);
 		}
+		
 		List<Bootcamp> bootcamps = bServ.getAll();
+		model.addAttribute("newUser", new User());
 		model.addAttribute("bootcamps", bootcamps);
 		return "index";
-	}
-	
-	//Login page for testing login and registration
-	@RequestMapping("/login")
-	public String logreg(@ModelAttribute("user") User user, Model model) {
-		model.addAttribute("newUser", new User());
-		model.addAttribute("user", new User());
-		return "logreg";
 	}
 	
 	//Post method for handling user registration
@@ -83,12 +77,16 @@ public class MainController {
 		if(userService.authenticateUser(email, password)) {
     		User user = userService.findByEmail(email);
     		session.setAttribute("user", user.getId());
+    		
+    		System.out.println("User logged in: " + user.getFname() + " " + user.getLname());
+    		
     		return "redirect:/";
     	} else {
     		model.addAttribute("error", "Could not log you in!");
     		model.addAttribute("user", new User());
     		model.addAttribute("newUser", new User());
-    		return "logreg";
+    		
+    		return "redirect:/";
     	}
 	}
 	
@@ -106,10 +104,11 @@ public class MainController {
 		return "errorPage";
 	}
 	
-	@RequestMapping(value="/bootcamp/{name}/{id}")
-	public String bootcamp(@PathVariable("id") Long id, HttpSession session, Model model) {
+	//Returns page for selected Bootcamp
+	@RequestMapping(value="/bootcamp/{name}")
+	public String bootcamp(@PathVariable("name") String name, HttpSession session, Model model) {
 		Long userId = (Long) session.getAttribute("user");
-		Bootcamp bootcamp = bServ.findById(id);
+		Bootcamp bootcamp = bServ.findByName(name);
 		User u;
 		if(userId != null) {
 			u = userService.findById(userId);
