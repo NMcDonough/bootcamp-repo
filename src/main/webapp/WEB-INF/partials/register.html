@@ -1,0 +1,37 @@
+<form:form method="POST" action="/registration" modelAttribute="newUser">
+                    <p>
+                        <form:label path="email">Email:</form:label>
+                        <form:input type="email" path="email"/>
+                        <form:errors path="email" class="red"/>
+                    </p>
+                    <p>
+                        <form:label path="fname">First Name:</form:label>
+                        <form:input path="fname"/>
+                        <form:errors path="fname" class="red"/>
+                    </p>
+                    <p>
+                        <form:label path="lname">Last Name:</form:label>
+                        <form:input path="lname"/>
+                        <form:errors path="lname" class="red"/>
+                    </p>
+                    <p>
+                        <form:label path="status">I am a(n):</form:label>
+                        <form:select path="status">
+                            <option value="Alumnus">Alumnus</option>
+                            <option value="Student">Student</option>
+                            <option value="Prospect">Prospective Student</option>
+                        </form:select>
+                        <form:errors path="status" class="red"/>
+                    </p>
+                    <p>
+                        <form:label path="password">Password:</form:label>
+                        <form:password path="password"/>
+                        <form:errors path="password" class="red"/>
+                    </p>
+                    <p>
+                        <form:label path="confirm">Password Confirmation:</form:label>
+                        <form:password path="confirm"/>
+                        <form:errors path="confirm" class="red"/>
+                    </p>
+                    <input type="submit" value="Register" class="btn" />
+                </form:form>

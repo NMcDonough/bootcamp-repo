@@ -9,11 +9,32 @@ body {
 }
 
 .catBox {
-    display: flex;
+    display: inline-flex;
     margin: 1%;
     border: 1px solid gray;
     border-radius: 15px;
     padding: 10px;
     align-items: center;
     justify-content: center;
+}
+
+ul{
+    list-style: none;
+}
+
+.bootImg {
+    width: 150px;
+    height: 150px;
+}
+
+.titleLink{
+    color: black;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
 }

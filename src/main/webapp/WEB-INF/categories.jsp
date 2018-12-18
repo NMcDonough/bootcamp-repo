@@ -10,6 +10,7 @@
 <title>Categories Menu</title>
 </head>
 
+<script src="/js/bootstrap.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bootcamps.css">
 <link rel="stylesheet" href="/css/nav.css">

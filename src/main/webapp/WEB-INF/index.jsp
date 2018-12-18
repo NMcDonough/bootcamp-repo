@@ -42,7 +42,7 @@
                 <c:forEach items="${bootcamps}" var="bootcamp">
                     <div class="bootcamp">
                         <h3>${bootcamp.name}</h3>
-                        <a href="/bootcamp/${bootcamp.name}/${bootcamp.id}">
+                        <a href="/bootcamp/${bootcamp.name}">
                             <img class="bootImg" src="${bootcamp.image}" alt="${bootcamp.name}">
                         </a>
                     </div>

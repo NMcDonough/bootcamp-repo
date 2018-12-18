@@ -8,5 +8,7 @@ import com.bootcamp.web.models.Bootcamp;
 
 @Repository
 public interface BootcampRepository extends CrudRepository<Bootcamp, Long> {
-    List<Bootcamp> findAll(); 
+    List<Bootcamp> findAll();
+    
+    Bootcamp findByName(String name);
 }

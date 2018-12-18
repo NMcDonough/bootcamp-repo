@@ -44,15 +44,16 @@ public class AdminController {
 		if (id == null) {			
 			return "redirect:/";			
 		}
-		User u = uServ.findById(id);
-		u.setPassword(null);
-		if(u.getUserlevel()<5) {
+		User user = uServ.findById(id);
+		user.setPassword(null);
+		if(user.getUserlevel()<5) {
 			return "redirect:/";			
 		}
 		List<Category> cates = cServ.findAll();
 		model.addAttribute("categories", cates);
 		model.addAttribute("category", new Category());
-		model.addAttribute("user", u);
+		model.addAttribute("user", user);
+		model.addAttribute("newUser", new User());
 		return "categories";
 	}
 	
@@ -92,13 +93,15 @@ public class AdminController {
 		if (id == null) {			
 			return "redirect:/";			
 		}
-		User u = uServ.findById(id);
-		if(u.getUserlevel()<5) {
+		User user = uServ.findById(id);
+		if(user.getUserlevel()<5) {
 			return "redirect:/";			
 		}
 		List<Thread> threads = tServ.getAll();
 		model.addAttribute("threads", threads);
 		model.addAttribute("thread", new Thread());
+		model.addAttribute("user", user);
+		model.addAttribute("newUser", new User());
 		return "threads";
 	}
 	
@@ -147,6 +150,8 @@ public class AdminController {
 		List<Bootcamp> bootcamps = bServ.getAll();
 		model.addAttribute("bootcamps", bootcamps);
 		model.addAttribute("bootcamp", new Bootcamp());
+		model.addAttribute("user", new User());
+		model.addAttribute("newUser", new User());
 		return "bootcamps";
 	}
 	
